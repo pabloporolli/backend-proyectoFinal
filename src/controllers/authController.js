@@ -2,6 +2,9 @@
 import * as model from '../models/users.js'
 import bcrypt from 'bcrypt'
 import { usuarioActual } from '../router/routerAuth.js'
+import MongoDBClient from '../clases/MongoDBClient.class.js'
+
+
 
 
 async function generateHashPassword(password) {
@@ -11,6 +14,7 @@ async function generateHashPassword(password) {
 
 
 const autorizarUsuario = (req, res) =>{
+
     const nombre = req.session.passport.user.username
     const email = req.session.passport.user.email
     res.render('home',  {nombre: nombre, email: email})

@@ -19,6 +19,7 @@ const argv = parseArgs(process.argv.slice(2), {
 export default {
     PORT: argv.port,
     mode: argv.mode,
+    NODE_ENV: 'development',
     mongoLocal: {
         
     },

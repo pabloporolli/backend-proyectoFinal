@@ -11,6 +11,7 @@ import parseArgs from 'minimist'
 import routerAuth from './src/router/routerAuth.js'
 import routerProductos from './src/router/routerProductos.js'
 import routerCarritos from './src/router/routerCarritos.js'
+import routerPrecios from "./src/router/routerPrecios.js";
 import ejs from 'ejs'
 
 const app = express();
@@ -34,6 +35,8 @@ app.use(session(config.session))
 
 
 //-----------Mongo DB--------------//
+// export const conectarDB = () => {
+// } 
 mongoose.set('strictQuery', false)
 const URL = 'mongodb://localhost:27017/usuarios'
 mongoose.connect(URL, {
@@ -49,6 +52,8 @@ app.use('/', routerAuth)
 app.use('/productos', routerProductos)
 
 app.use('/carrito', routerCarritos)
+
+app.use('/productos-precios', routerPrecios)
 
 
 //-----------SERVIDOR---------------//

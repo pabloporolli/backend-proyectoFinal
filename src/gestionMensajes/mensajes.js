@@ -54,4 +54,3 @@ export async function enviarWA () {
     }
     res.send('Se envió WA')
 }
-}

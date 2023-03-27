@@ -11,12 +11,23 @@ import {autorizarUsuario,
         registro,
         registrarUsuario,
         obtenerDatosPersonales} from '../controllers/authController.js'
+import MongoDBClient from '../clases/MongoDBClient.class.js';
+import CustomError from '../clases/CustomError.class.js';
+import logger from '../config/loggers.js';
 
 
 const routerAuth = Router()
 routerAuth.use(session(config.session))
 
-
+// const conectarBase = () => {
+//     try {
+//         mongoose.connect(config.mongodb.cnxStr, config.mongodb.options)
+//     } catch (error) {
+//         const cuserr = new CustomError(500, 'Error al conectar base', error);
+//             logger.error(cuserr);
+//             throw cuserr;
+//     }
+// }
 
 routerAuth.use(passport.initialize())
 routerAuth.use(passport.session())

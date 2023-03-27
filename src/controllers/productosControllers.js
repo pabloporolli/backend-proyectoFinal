@@ -4,12 +4,16 @@
 import {
     productosDao as productosApi
 } from '../models/daos/index.js'
+import traerProducto from './productoPreciosDTO.js'
 
 
-
-const listarProductos = async (req, res) => {
-    const respuesta =  await productosApi.getAll()
-    res.json({respuesta})
+async function listarProductos (req, res) {
+    try {
+        const respuesta =  await productosApi.getAll()
+        return res.json({respuesta})
+    } catch (error) {
+        throw new Error (`Error al hacer el getAll ${error}`)
+    }
 }
 
 const agregarProducto = async (req, res) => {
@@ -24,8 +28,18 @@ const agregarProducto = async (req, res) => {
     })
 }
 
+let producto;
+const listarProductoByID = async (req, res) => {
+    const id = parseInt(req.params.id)
+    producto = await productosApi.getById(id)
+    traerProducto(producto)
+    res.json(producto)
+}
+
 
 export {
     listarProductos,
-    agregarProducto
+    agregarProducto,
+    listarProductoByID,
+    producto
 }
