@@ -75,3 +75,4 @@ if (config.mode == 'CLUSTER' && cluster.isPrimary) {
     })
 }
 
+export default app
