@@ -1,0 +1,37 @@
+mutation {
+  crearProducto(datos: {
+    title: "bicicleta desde graphql",
+    price: 1000,
+    thumbnail: "www.bicicletas.com",
+    }) {
+        id
+    }
+}
+
+query {
+    getProductos {
+        title
+        price  
+    }
+}
+
+query {
+  getProductoById(id: 17) {
+    title
+    price
+  }
+}
+
+mutation {
+  borrarProductoById(id: 16) {
+    title
+  }
+}
+
+
+mutation {
+  modificarProductoById(id: 18) {
+    title
+    thumbnail
+  }
+}

@@ -14,6 +14,8 @@ import routerCarritos from './src/router/routerCarritos.js'
 import routerPrecios from "./src/router/routerPrecios.js";
 import ejs from 'ejs'
 
+import GraphQLController from "./src/controllers/graphQLController.js";
+
 const app = express();
 
 //------------MOTOR DE PLANTILLAS Y MIDDLEWARES----------//
@@ -54,6 +56,8 @@ app.use('/productos', routerProductos)
 app.use('/carrito', routerCarritos)
 
 app.use('/productos-precios', routerPrecios)
+
+app.use('/graphql', new GraphQLController());
 
 
 //-----------SERVIDOR---------------//

@@ -36,10 +36,21 @@ const listarProductoByID = async (req, res) => {
     res.json(producto)
 }
 
+const borrarProductoById = async (req, res) => {
+    const id = parseInt(req.params.id)
+    productosApi.deleteById(id)
+    .then(resp =>
+            resp ?
+                res.send(resp)
+                :
+                res.send({error: "Producto no encontrado"})
+        )
+}
 
 export {
     listarProductos,
     agregarProducto,
     listarProductoByID,
+    borrarProductoById,
     producto
 }

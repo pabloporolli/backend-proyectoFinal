@@ -4,7 +4,8 @@ import config from "../config/config.js";
 import mongoose from "mongoose";
 import {
     listarProductos,
-    agregarProducto
+    agregarProducto,
+    borrarProductoById
 } from '../controllers/productosControllers.js'
 
 const routerProductos = Router()
@@ -16,6 +17,8 @@ const routerProductos = Router()
 routerProductos.get('/', listarProductos)
 
 routerProductos.post('/', agregarProducto)
+
+routerProductos.delete('/', borrarProductoById)
 
 
 export default routerProductos

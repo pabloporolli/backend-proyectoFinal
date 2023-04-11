@@ -20,7 +20,7 @@ class ContenedorMongoDb {
             await this.conn.connect()            
             const leerUno = await this.coleccion.find({id: id})
             console.log(leerUno);
-            return (leerUno)
+            return leerUno
         } catch (error) {
             const cuserr = new CustomError(500, 'Error con el médoto getByID', error);
             logger.error(cuserr);
@@ -82,7 +82,9 @@ class ContenedorMongoDb {
     async deleteById(id) {
         try {
             await this.conn.connect()
+            const prodABorrar = await this.coleccion.find({id: id})
             const del = await this.coleccion.deleteOne({id: id})
+            return prodABorrar
         } catch (error) {
             const cuserr = new CustomError(500, 'Error con el método deleteById', error);
             logger.error(cuserr);
