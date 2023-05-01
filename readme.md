@@ -91,3 +91,9 @@ La persistencia de los mensajes está desarrollada en archivo.
 Para ver la funcionalidad de finalizar compra, se debe hacer desde el navegador, poniendo por parámetro el carrito que se desea comprar. Ejemplo:
 http://localhost:8070/carrito/2/finalizar-compra
 
+### 7. Deploy
+Se intentó hacer el deploy por Heroku. Se hizo de dos maneras diferentes: por Heroku CLI y por GitHub. Ninguno de las formas funcionó. Los resultados están en estos dos sitios:
+https://bikeshop.herokuapp.com/
+https://secret-eyrie-58048.herokuapp.com/
+Suponemos que hay algún problema con las variables de entorno pero no lo pudimos resolver.
+![](public/img/env%20en%20Heroku.png)
