@@ -12,9 +12,9 @@ import routerAuth from './src/router/routerAuth.js'
 import routerProductos from './src/router/routerProductos.js'
 import routerCarritos from './src/router/routerCarritos.js'
 import routerPrecios from "./src/router/routerPrecios.js";
-import ejs from 'ejs'
+import dotenv from 'dotenv'
 
-// import GraphQLController from "./src/controllers/graphQLController.js";
+dotenv.config()
 
 const app = express();
 
@@ -37,10 +37,8 @@ app.use(session(config.session))
 
 
 //-----------Mongo DB--------------//
-// export const conectarDB = () => {
-// } 
 mongoose.set('strictQuery', false)
-const URL = 'mongodb+srv://pablo:HdQjESbohlGU3CHy@cluster0.t07wrvg.mongodb.net/test'
+const URL = process.env.MONGO_REMOTE_CNXSTR
 mongoose.connect(URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -90,8 +88,6 @@ app.use('/productos', routerProductos)
 app.use('/carrito', routerCarritos)
 
 app.use('/productos-precios', routerPrecios)
-
-// app.use('/graphql', new GraphQLController());
 
 
 //-----------SERVIDOR---------------//

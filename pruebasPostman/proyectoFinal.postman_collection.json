@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "6168fee7-e6e9-4110-b77c-8d2955bc110e",
+		"name": "proyectoFinal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24320585"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8070/productos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Madone SL\",\n    \"price\": 8900,\n    \"thumbnail\": \"bici.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8070/productos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"productos"
+					]
+				},
+				"description": "POST de productos"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8070/productos/5",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8070/productos/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"productos",
+						"5"
+					]
+				},
+				"description": "Delete producto por ID"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8070/productos/3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8070/productos/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"productos",
+						"3"
+					]
+				},
+				"description": "Get producto por ID"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8070/productos/3",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"nueva bici\",\n    \"price\": 999,\n    \"thumbnail\": \"bici.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8070/productos/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"productos",
+						"3"
+					]
+				},
+				"description": "PUT. Modificar producto por ID"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8070/carrito",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n    \"title\": \"Madone SLX\",\n    \"price\": 6000,\n    \"thumbnail\": \"bici.com\",\n    \"id\": 1\n},\n{\n    \"title\": \"Madone\",\n    \"price\": 900,\n    \"thumbnail\": \"bici.com\",\n    \"id\": 2\n}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8070/carrito",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"carrito"
+					]
+				},
+				"description": "Crear y agregar productos al carrito"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8070/carrito/7",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8070/carrito/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"carrito",
+						"7"
+					]
+				},
+				"description": "Get un carrito por ID"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8070/carrito/6/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8070/carrito/6/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"carrito",
+						"6",
+						"1"
+					]
+				},
+				"description": "Delete. Borrar un producto de un carrito"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8070/carrito/7",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8070/carrito/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"carrito",
+						"7"
+					]
+				},
+				"description": "Delete. Borrar un carrito entero según su ID"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8070/carrito/6/1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8070/carrito/6/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"carrito",
+						"6",
+						"1"
+					]
+				},
+				"description": "POST. Agregar un producto a un carrito, usando ID del producto y ID del carrito"
+			},
+			"response": []
+		}
+	]
+}

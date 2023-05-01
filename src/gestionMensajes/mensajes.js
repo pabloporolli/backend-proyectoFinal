@@ -31,7 +31,6 @@ export async function enviarMail() {
             subject: 'Agregó un nuevo elemento al carrito',
             html: `<h1 style="color: blue;"> Se realizado un nuevo pedido <span style="color: green;" Muchas gracias</span></h1>`
           })
-        console.log(info);
     }
     catch (e)
     {
@@ -47,11 +46,9 @@ export async function enviarWA () {
         from: '+13155993091',
         to: '+542234497220'
         });
-    console.log(message);
     }
     catch (e)
     {
         logger.error(e)
     }
-    console.log('Se envió WA')
 }

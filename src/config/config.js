@@ -33,9 +33,6 @@ export default {
      }
     },
 
-// user: pablo
-// pass: HdQjESbohlGU3CHy
-// ip: 167.63.60.17/32
 
     sqlite3: {
         client: 'sqlite3',
@@ -63,7 +60,7 @@ export default {
 
     mongodb: {
         // Remote
-        cnxStr: 'mongodb+srv://pablo:HdQjESbohlGU3CHy@cluster0.t07wrvg.mongodb.net/test',
+        cnxStr: process.env.MONGO_REMOTE_CNXSTR,
         options: {
             useNewUrlParser: true,
             useUnifiedTopology: true,

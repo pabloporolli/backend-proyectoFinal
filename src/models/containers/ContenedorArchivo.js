@@ -85,9 +85,7 @@ class ContenedorArchivo {
             if (carrito == -1) {
                 throw new Error(`Error al actualizar: no se encontró el id ${pos}`)
             } else {
-                console.log("CARRITO DESDE l.88", carrito);
                 carrito[0]["productos"].push(nuevoElem)
-                console.log("CARRITO DESDE l.90 con PUSH", carrito);
                 try {
                     await fs.writeFile(this.ruta, JSON.stringify(nuevoElem, null, 2))
                 } catch (error) {

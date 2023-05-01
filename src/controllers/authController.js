@@ -71,7 +71,6 @@ async function saveUser(user) {
 
 let datosPersonales
 const obtenerDatosPersonales = async (req, res) => {
-    console.log(usuarioActual);
     if (!usuarioActual){
         res.redirect('/login')
     }

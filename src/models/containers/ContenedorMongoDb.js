@@ -17,7 +17,6 @@ class ContenedorMongoDb {
         try {
             await this.conn.connect()            
             const leerUno = await this.coleccion.find({id: id})
-            console.log(leerUno);
             return leerUno
         } catch (error) {
             const cuserr = new CustomError(500, 'Error con el médoto getByID', error);
@@ -30,7 +29,6 @@ class ContenedorMongoDb {
         try {
             await this.conn.connect()
             const leerTodo = await this.coleccion.find()
-            console.log(leerTodo);
             return leerTodo            
         } catch (error) {
             const cuserr = new CustomError(500, 'Error con el método getAll', error);
@@ -49,7 +47,6 @@ class ContenedorMongoDb {
             const elementoSaved = await this.coleccion.insertMany({
                 ...nuevoElem
             })            
-            console.log('Elemento guardado', elementoSaved);
             return nuevoElem
         } catch (error) {
             const cuserr = new CustomError(500, 'Error con el método save', error);
@@ -67,8 +64,6 @@ class ContenedorMongoDb {
             const cuserr = new CustomError(500, 'Error con el método modifyById', error);
             logger.error(cuserr);
             throw cuserr;
-        } finally {
-            this.conn.disconnect()
         }
     }
 
@@ -82,8 +77,6 @@ class ContenedorMongoDb {
             const cuserr = new CustomError(500, 'Error con el método deleteById', error);
             logger.error(cuserr);
             throw cuserr;
-        } finally {
-            this.conn.disconnect()
         }
     }
 
@@ -95,22 +88,17 @@ class ContenedorMongoDb {
             const cuserr = new CustomError(500, 'Error con el método deleteAll', error);
             logger.error(cuserr);
             throw cuserr;
-        } finally {
-            this.conn.disconnect()
         }
     }
 
     async modifyCarritoById (pos, nuevoElem) {
         try {
             await this.conn.connect()
-            console.log(nuevoElem);
             const elemUpdate = await this.coleccion.updateOne({id: pos}, {$addToSet: {productos: nuevoElem}})
         } catch (error) {
             const cuserr = new CustomError(500, 'Error con el método modifyCarritoByID', error);
             logger.error(cuserr);
             throw cuserr;
-        } finally {
-            this.conn.disconnect()
         }
     }
 

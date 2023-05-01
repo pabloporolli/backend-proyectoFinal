@@ -1,7 +1,7 @@
 ### 1. Envío de mail de confirmación
 Se realiza cuando se agrega un producto al carrito.
 Para que funcione, hay que volver a configurar el mail del receptor. Ahora hay un ethereal mail que expira.
-La nueva dirección de correo se debe agregar en el archivo mensajes.js, dentro de la carpeta gestionMensajes, en las líneas 6 y 12. En la línea 13, se debe poner el pass.
+La nueva dirección de correo se debe agregar en el archivo mensajes.js, dentro de la carpeta gestionMensajes, en las líneas 7 y 13. En la línea 14, se debe poner el pass.
 
 ### 2. Envío de WhatsApp
 La entrega es un entorno de desarrollo. Por ello, se utiliza un console.log para mostrar el envío correcto del WA. Para que la persona lo reciba, tiene que configurar su número en la línea 47 de mensajes.js.
@@ -63,6 +63,7 @@ http://localhost:8070/carrito/2
 Método Delete
 http://localhost:8070/carrito/3/1
 Se borra el producto 1 del carrito 3
+Nota: es posible que, para las pruebas, haya que ir cambiando de carritos y de productos, ya que, en las pruebas realizadas antes de la entrega, se han borrado tanto productos como productos dentro de los carritos.
 
 ## Borrar todo un carrito
 Método Delete
