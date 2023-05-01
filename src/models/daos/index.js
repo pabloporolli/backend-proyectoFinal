@@ -4,17 +4,10 @@ let carritosDao
 switch ('mongodb') {
     case 'json':
         const { default: ProductosDaoArchivo } = await import('./productos/ProductosDaoArchivo.js')
-        // const { default: CarritosDaoArchivo } = await import('./carritos/CarritosDaoArchivo.js')
+        const { default: CarritosDaoArchivo } = await import('./carritos/CarritosDaoArchivo.js')
 
         productosDao = new ProductosDaoArchivo()
-        // carritosDao = new CarritosDaoArchivo()
-        break
-    case 'firebase':
-        const { default: ProductosDaoFirebase } = await import('./productos/ProductosDaoFirebase.js')
-        // const { default: CarritosDaoFirebase } = await import('./carritos/CarritosDaoFirebase.js')
-
-        productosDao = new ProductosDaoFirebase()
-        // carritosDao = new CarritosDaoFirebase()
+        carritosDao = new CarritosDaoArchivo()
 
         break
     case 'mongodb':
@@ -25,15 +18,7 @@ switch ('mongodb') {
         carritosDao = new CarritosDaoMongoDb()
 
         break
-    case 'mariadb':
-
-        break
-    case 'sqlite3':
-
-        break
-    default:
-
-        break
+        
 }
 
 export { productosDao, carritosDao }

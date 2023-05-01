@@ -1,7 +1,10 @@
 import dotenv from 'dotenv'
 import parseArgs from 'minimist'
-import path from 'path'
 import MongoStore from 'connect-mongo'
+import path from 'path'
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config()
 
@@ -20,30 +23,47 @@ export default {
     PORT: argv.port,
     mode: argv.mode,
     NODE_ENV: 'development',
-    mongoLocal: {
-        
+
+    mongodbLocal: {
+        cnxStr: process.env.CNXSTR,
+        options: {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 5000
+     }
     },
-    mongoRemote: {
-        
-    },
+
+// user: pablo
+// pass: HdQjESbohlGU3CHy
+// ip: 167.63.60.17/32
+
     sqlite3: {
-        
+        client: 'sqlite3',
+        connection: {
+            filename: __dirname + '/../DB/mensajes.sqlite'
+        },
+        useNullAsDefault: true
     },
-    mariaDb: {
+    
+
+    mysql: {
         client: 'mysql',
         connection: {
-            host: '127.0.0.1',
-            user: 'root',
-            password: 'root',
-            database: 'coderhouse_01',
-            port: 8889
+            host: process.env.MYSQL_HOST,
+            user: process.env.MYSQL_USER,
+            password: process.env.MYSQL_PASS,
+            database: process.env.MYSQL_DATABASE,
+            port: process.env.MYSQL_PORT
         }
     },
+
     fileSystem: {
         path: "contenedor.json"
     },
+
     mongodb: {
-        cnxStr: 'mongodb://localhost:27017/usuarios',
+        // Remote
+        cnxStr: 'mongodb+srv://pablo:HdQjESbohlGU3CHy@cluster0.t07wrvg.mongodb.net/test',
         options: {
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -54,9 +74,9 @@ export default {
     session: {
         store: MongoStore.create({
             // local
-            mongoUrl: "mongodb://localhost:27017/usuarios"
+            mongoUrl: process.env.MONGO_URL
         }),
-        secret: 'secret',
+        secret: process.env.SECRET,
         resave: false,
         saveUninitialized: false,
         cookie: {

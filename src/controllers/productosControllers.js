@@ -1,5 +1,4 @@
-
-
+import logger from '../config/loggers.js'
 
 import {
     productosDao as productosApi
@@ -13,12 +12,12 @@ async function listarProductos (req, res) {
         return res.json({respuesta})
     } catch (error) {
         throw new Error (`Error al hacer el getAll ${error}`)
+        logger.error(error)
     }
 }
 
 const agregarProducto = async (req, res) => {
     const prod = await req.body
-    console.log("prod: ", prod)
     const producto = {
         ...prod,
     }
@@ -47,10 +46,23 @@ const borrarProductoById = async (req, res) => {
         )
 }
 
+const modificarProductoById = async (req, res) => {
+    const id = parseInt(req.params.id)
+    const modificacion = await req.body
+    productosApi.modifyById(id, modificacion)
+    .then(resp =>
+        resp ?
+            res.send(resp)
+            :
+            res.send({error: "Producto no modificado"})
+    )
+}
+
 export {
     listarProductos,
     agregarProducto,
     listarProductoByID,
     borrarProductoById,
+    modificarProductoById,
     producto
 }

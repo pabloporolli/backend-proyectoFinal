@@ -1,12 +1,10 @@
 import mongoose from 'mongoose'
 import pkg from 'mongoose';
 const { model } = pkg;
-import config from '../../config/config.js'
 import CustomError from '../../clases/CustomError.class.js';
 import MongoDBClient from '../../clases/MongoDBClient.class.js';
 import logger from '../../config/loggers.js';
 
-// await mongoose.connect(config.mongodb.cnxStr, config.mongodb.options)
 
 class ContenedorMongoDb {
 
@@ -25,8 +23,6 @@ class ContenedorMongoDb {
             const cuserr = new CustomError(500, 'Error con el médoto getByID', error);
             logger.error(cuserr);
             throw cuserr;
-        } finally {
-            this.conn.disconnect();
         }
     }
 
@@ -40,8 +36,6 @@ class ContenedorMongoDb {
             const cuserr = new CustomError(500, 'Error con el método getAll', error);
             logger.error(cuserr);
             throw cuserr;
-        } finally {
-            this.conn.disconnect()
         }
     }
 
@@ -56,13 +50,11 @@ class ContenedorMongoDb {
                 ...nuevoElem
             })            
             console.log('Elemento guardado', elementoSaved);
-            return id
+            return nuevoElem
         } catch (error) {
             const cuserr = new CustomError(500, 'Error con el método save', error);
             logger.error(cuserr);
             throw cuserr;
-        } finally {
-            this.conn.disconnect()
         }
     }
 
@@ -70,6 +62,7 @@ class ContenedorMongoDb {
         try {
             await this.conn.connect()
             const elemUpdate = await this.coleccion.updateOne({id: pos}, {$set: nuevoElem})
+            return elemUpdate
         } catch (error) {
             const cuserr = new CustomError(500, 'Error con el método modifyById', error);
             logger.error(cuserr);

@@ -11,27 +11,12 @@ import {autorizarUsuario,
         registro,
         registrarUsuario,
         obtenerDatosPersonales} from '../controllers/authController.js'
-import MongoDBClient from '../clases/MongoDBClient.class.js';
-import CustomError from '../clases/CustomError.class.js';
-import logger from '../config/loggers.js';
-
 
 const routerAuth = Router()
 routerAuth.use(session(config.session))
 
-// const conectarBase = () => {
-//     try {
-//         mongoose.connect(config.mongodb.cnxStr, config.mongodb.options)
-//     } catch (error) {
-//         const cuserr = new CustomError(500, 'Error al conectar base', error);
-//             logger.error(cuserr);
-//             throw cuserr;
-//     }
-// }
-
 routerAuth.use(passport.initialize())
 routerAuth.use(passport.session())
-
 
 const LocalStrategy = Strategy;
 
@@ -41,11 +26,9 @@ import bcrypt from 'bcrypt'
 let usuarioActual
 passport.use(new LocalStrategy(
     async function(email, password, done){
-        console.log(`El usuario enviado es ${email} ${password}`)
         // Existe usuario devuelve el objeto del usuario (con ObjectId de Mongo)
         const existeUsuario = await model.usuarios.findOne({email: email})
         usuarioActual = existeUsuario
-        console.log('Existe usuario: ' + existeUsuario)
 
         if(!existeUsuario){
             console.log('usuario no encontrado')
@@ -82,8 +65,6 @@ async function generateHashPassword(password) {
 
 async function verifyPass(usuario, password) {
     const match = await bcrypt.compare(password, usuario.password)
-    console.log(`pass login: ${password} || pass hash: ${usuario.password}`)
-    console.log(match)
     return match
 }
 

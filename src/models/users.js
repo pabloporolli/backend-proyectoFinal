@@ -10,7 +10,8 @@ const usuariosSchema = new Schema({
     direccion: {type: String},
     edad: {type: Number},
     telefono: {type: Number},
-    foto: {type: String}
+    foto: {type: String},
+    admin: {type: Boolean, required: true}
 })
 
 export const usuarios = mongoose.model(users, usuariosSchema)

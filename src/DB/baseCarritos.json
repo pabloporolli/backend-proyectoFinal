@@ -1,0 +1,38 @@
+[
+  {
+    "productos": [
+      {
+        "title": "Madone SLX",
+        "price": 6000,
+        "thumbnail": "bici.com",
+        "id": 1
+      },
+      {
+        "title": "Madone",
+        "price": 900,
+        "thumbnail": "bici.com",
+        "id": 2
+      }
+    ],
+    "cart_timestamp": 1682892553431,
+    "id": 1
+  },
+  {
+    "productos": [
+      {
+        "title": "Madone SLX",
+        "price": 6000,
+        "thumbnail": "bici.com",
+        "id": 1
+      },
+      {
+        "title": "Madone",
+        "price": 900,
+        "thumbnail": "bici.com",
+        "id": 2
+      }
+    ],
+    "cart_timestamp": 1682892554303,
+    "id": 2
+  }
+]

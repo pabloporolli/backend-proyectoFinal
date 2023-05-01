@@ -1,9 +1,7 @@
-
 import * as model from '../models/users.js'
 import bcrypt from 'bcrypt'
 import { usuarioActual } from '../router/routerAuth.js'
-import MongoDBClient from '../clases/MongoDBClient.class.js'
-
+import logger from '../config/loggers.js'
 
 
 
@@ -22,11 +20,11 @@ const autorizarUsuario = (req, res) =>{
 
 const desloggearUsuario = (req, res) => {
     let nombre = req.session.passport.user.username
-    console.log("NOMBRE: ", nombre);
     res.render('logout', {nombre: req.session.passport.user.username})
     req.session.destroy(err=>{
         if(err){
-            res.json({status: 'Error al desloggearse', body: err})
+            logger.error('Error al deslogguearse')
+            res.json({status: 'Error al deslogguearse', body: err})
 
         }
     })
@@ -46,7 +44,6 @@ const registro = (req, res) => {
 
 const registrarUsuario = async (req,res) =>{
     let{ username, email, password, direccion, edad, telefono, foto } = req.body
-    console.log(username, email, password)
     const newUser = {
         username: username,
         email: email,
@@ -64,6 +61,10 @@ const registrarUsuario = async (req,res) =>{
 }
 // Función para guardar el usuario
 async function saveUser(user) {
+    user = {
+        ...user,
+        admin: false
+    }
     const userSave = await model.usuarios.insertMany(user)
     return userSave
 }
@@ -71,8 +72,13 @@ async function saveUser(user) {
 let datosPersonales
 const obtenerDatosPersonales = async (req, res) => {
     console.log(usuarioActual);
-    datosPersonales = await model.usuarios.findOne({email: usuarioActual.email})
-    res.json(datosPersonales)
+    if (!usuarioActual){
+        res.redirect('/login')
+    }
+    else {
+        datosPersonales = await model.usuarios.findOne({email: usuarioActual.email})
+        res.json(datosPersonales)
+    }
 }
 
 

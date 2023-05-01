@@ -14,7 +14,7 @@ import routerCarritos from './src/router/routerCarritos.js'
 import routerPrecios from "./src/router/routerPrecios.js";
 import ejs from 'ejs'
 
-import GraphQLController from "./src/controllers/graphQLController.js";
+// import GraphQLController from "./src/controllers/graphQLController.js";
 
 const app = express();
 
@@ -40,10 +40,44 @@ app.use(session(config.session))
 // export const conectarDB = () => {
 // } 
 mongoose.set('strictQuery', false)
-const URL = 'mongodb://localhost:27017/usuarios'
+const URL = 'mongodb+srv://pablo:HdQjESbohlGU3CHy@cluster0.t07wrvg.mongodb.net/test'
 mongoose.connect(URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
+})
+
+
+
+//-----------Configuración del Socket----------//
+import { Server as HttpServer } from 'http'
+import { Server as IOSocket } from 'socket.io'
+const httpServer = new HttpServer(app)
+const io = new IOSocket(httpServer)
+
+import ContenedorDBChat from './src/controllers/chatController.js'
+import { log } from "console";
+import ContenedorArchivo from "./src/models/containers/ContenedorArchivo.js";
+
+const mensajes = new ContenedorArchivo ("./src/DB/chatMensajes.json")
+
+io.on('connection', socket => {
+    console.log('Nuevo cliente conectado');
+    
+    socket.on('nuevoMensaje', data => {
+        mensajes.save(data)
+        .then(() => {
+            mensajes.getAll()
+            .then((res) => {
+                socket.emit('mensajes', res)
+            })
+        })
+    })
+
+    mensajes.getAll()
+        .then((res) => {
+            socket.emit('mensajes', res)
+        })
+
 })
 
 
@@ -57,7 +91,7 @@ app.use('/carrito', routerCarritos)
 
 app.use('/productos-precios', routerPrecios)
 
-app.use('/graphql', new GraphQLController());
+// app.use('/graphql', new GraphQLController());
 
 
 //-----------SERVIDOR---------------//
@@ -74,9 +108,11 @@ if (config.mode == 'CLUSTER' && cluster.isPrimary) {
         cluster.fork()
     })
 } else {
-    app.listen(config.PORT, err => {
+    const servidor = httpServer.listen(config.PORT, err => {
         if (!err) console.log(`Servidor http escuchando en el puerto ${config.PORT} - PID: ${process.pid}`)
     })
+
+    servidor.on('error', error => console.log(`Error en servidor: ${error}`))
 }
 
 export default app

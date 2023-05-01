@@ -1,16 +1,17 @@
 import twilio from 'twilio';
+import logger from '../config/loggers.js'
 
 // MAIL
 
 import { createTransport } from 'nodemailer';
-const TEST_MAIL = 'jimmie.west@ethereal.email'
+const TEST_MAIL = 'gianni.satterfield@ethereal.email'
 
 const transporter = createTransport({
   host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: 'jimmie.west@ethereal.email',
-        pass: '8jRCX73Re5XghsbXqc'
+        user: 'gianni.satterfield@ethereal.email',
+        pass: 'j5DBbtECjnAn96fvBP'
     }
 })
 
@@ -27,14 +28,14 @@ export async function enviarMail() {
         const info = await transporter.sendMail({
             from: 'Servidor Node.JS',
             to: TEST_MAIL,
-            subject: 'Nuevo pedido',
+            subject: 'Agregó un nuevo elemento al carrito',
             html: `<h1 style="color: blue;"> Se realizado un nuevo pedido <span style="color: green;" Muchas gracias</span></h1>`
           })
         console.log(info);
     }
     catch (e)
     {
-        console.log(e)
+        logger.error(e)
     }
 }
 
@@ -50,7 +51,7 @@ export async function enviarWA () {
     }
     catch (e)
     {
-        console.log(e);
+        logger.error(e)
     }
-    res.send('Se envió WA')
+    console.log('Se envió WA')
 }

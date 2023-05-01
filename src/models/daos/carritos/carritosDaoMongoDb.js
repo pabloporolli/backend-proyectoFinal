@@ -10,10 +10,6 @@ class CarritosDaoMongoDb extends ContenedorMongoDb {
         })
     }
 
-    // async guardar(carrito = { productos: [] }) {
-    //     return super.save(carrito)
-    // }
-
     async guardar(nuevoElem) {
         const data = await this.coleccion.find()
         let id = 0
